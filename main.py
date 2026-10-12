@@ -1,5 +1,5 @@
-from calculator.menu import show_menu, handle_choice, title
-
+from calculator.menu import show_menu, handle_choice
+from calculator.ui import title
 
 def main():
     while True:
