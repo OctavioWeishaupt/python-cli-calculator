@@ -14,7 +14,7 @@ def main():
             break
         else:
             handle_choice(user_choice)
-
+        print()
 
 if __name__ == '__main__':
     try:
