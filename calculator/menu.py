@@ -1,7 +1,9 @@
 """Main menu display and option handling."""
 
 
+from calculator.inputs import read_number
 from calculator.ui import title, line
+from calculator.operations import add, subtract, multiply, divide, power
 
 
 def show_menu():
@@ -26,15 +28,56 @@ def handle_choice(option):
     """
     match option:
         case '1':
-            print('Opção ainda não disponível')
+            a = read_number('Primeiro número: ')
+            b = read_number('Segundo número: ')
+            try:
+                result = add(a, b)
+            except OverflowError:
+                print('ERRO: Resultado grande demais.')
+            else:
+                print(f'Resultado: {result}')
         case '2':
-            print('Opção ainda não disponível')
+            a = read_number('Primeiro número: ')
+            b = read_number('Segundo número: ')
+            try:
+                result = subtract(a, b)
+            except OverflowError:
+                print('ERRO: Resultado grande demais.')
+            else:
+                print(f'Resultado: {result}')
         case '3':
-            print('Opção ainda não disponível')
+            a = read_number('Primeiro número: ')
+            b = read_number('Segundo número: ')
+            try:
+                result = multiply(a, b)
+            except OverflowError:
+                print('ERRO: Resultado grande demais.')
+            else:
+                print(f'Resultado: {result}')
         case '4':
-            print('Opção ainda não disponível')
+            a = read_number('Numerador: ')
+            b = read_number('Denominador: ')
+            try:
+                result = divide(a, b)
+            except OverflowError:
+                print('ERRO: Resultado grande demais.')
+            except ZeroDivisionError:
+                print('ERRO: Divisão por zero não é permitida.')
+            else:
+                print(f'Resultado: {result}')
         case '5':
-            print('Opção ainda não disponível')
+            a = read_number('Base: ')
+            b = read_number('Expoente: ')
+            try:
+                result = power(a, b)
+            except OverflowError:
+                print('ERRO: Resultado grande demais.')
+            except ZeroDivisionError:
+                print('ERRO: Zero não pode ser elevado a um número negativo.')
+            except ValueError:
+                print('ERRO: Resultado não é real.')
+            else:
+                print(f'Resultado: {result}')
         case '6':
             print('Opção ainda não disponível')
         case '7':
