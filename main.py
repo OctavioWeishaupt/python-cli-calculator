@@ -14,7 +14,6 @@ def main():
             break
         else:
             handle_choice(user_choice)
-    title('FINALIZANDO ...')
 
 
 if __name__ == '__main__':
@@ -23,8 +22,8 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         print()
         print('Programa interrompido pelo usuário.')
-        title('FINALIZANDO ...')
     except EOFError:
         print()
         print('Entrada encerrada pelo usuário.')
+    finally:
         title('FINALIZANDO ...')
