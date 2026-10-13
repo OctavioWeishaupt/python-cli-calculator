@@ -18,4 +18,13 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print()
+        print('Programa interrompido pelo usuário.')
+        title('FINALIZANDO ...')
+    except EOFError:
+        print()
+        print('Entrada encerrada pelo usuário.')
+        title('FINALIZANDO ...')
