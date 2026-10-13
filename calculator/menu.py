@@ -1,7 +1,7 @@
 """Main menu display and option handling."""
 
 
-from calculator.ui import *
+from calculator.ui import title, line
 
 
 def show_menu():
