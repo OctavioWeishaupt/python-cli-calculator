@@ -1,10 +1,20 @@
+"""User input helpers with validation."""
+
+
 from math import isfinite
 
+
 def read_number(prompt='Digite um valor: '):
-    """
-    -> Read a number from the user.
-    :param prompt: The prompt to be displayed
-    :return: Return the entered number if valid
+    """Read a number from the user, asking again until it is valid.
+
+    Accepts a comma as the decimal separator. Rejects text, empty
+    input, and non-finite values such as nan and inf.
+
+    Args:
+        prompt: Text shown to the user when asking for input.
+
+    Returns:
+        The number entered by the user, as a float.
     """
     while True:
         try:

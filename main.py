@@ -1,7 +1,12 @@
+"""Entry point of the CLI calculator."""
+
+
 from calculator.menu import show_menu, handle_choice
 from calculator.ui import title
 
+
 def main():
+    """Run the main menu loop until the user chooses to exit."""
     while True:
         show_menu()
         user_choice = input("Escolha uma opção: ")

@@ -1,9 +1,11 @@
+"""Main menu display and option handling."""
+
+
 from calculator.ui import *
 
+
 def show_menu():
-    """
-    -> Show the legend of handle choice
-    """
+    """Print the main menu with all available options."""
     title('CALCULADORA PYTHON')
     print('  [ 1 ] - Somar')
     print('  [ 2 ] - Subtrair')
@@ -17,9 +19,10 @@ def show_menu():
 
 
 def handle_choice(option):
-    """
-    -> Handle the choice
-    :param option: receive user choice
+    """Run the action that matches the chosen menu option.
+
+    Args:
+        option: The option typed by the user, as a string.
     """
     match option:
         case '1':

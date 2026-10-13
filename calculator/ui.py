@@ -1,17 +1,19 @@
+"""Terminal display helpers."""
+
+
 LEN_LINE = 50
 
 
 def line():
-    """
-    -> Write a line of '-'
-    """
+    """Print a horizontal separator line."""
     print('-' * LEN_LINE)
 
 
 def title(txt):
-    """
-    -> Write a title personalized
-    :param txt: The text to be printed in the title
+    """Print a text centered between two separator lines.
+
+    Args:
+        txt: The title text to display.
     """
     line()
     print(txt.center(LEN_LINE))
