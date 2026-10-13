@@ -6,6 +6,40 @@ from calculator.ui import title, line
 from calculator.operations import add, subtract, multiply, divide, power
 
 
+OPERATIONS = {
+    '1': {
+        'func': add,
+        'prompt_a': 'Primeiro número: ',
+        'prompt_b': 'Segundo número: ',
+        'symbol': '+'
+    },
+    '2': {
+        'func': subtract,
+        'prompt_a': 'Primeiro número: ',
+        'prompt_b': 'Segundo número: ',
+        'symbol': '-'
+    },
+    '3': {
+        'func': multiply,
+        'prompt_a': 'Primeiro número: ',
+        'prompt_b': 'Segundo número: ',
+        'symbol': '×'
+    },
+    '4': {
+        'func': divide,
+        'prompt_a': 'Numerador: ',
+        'prompt_b': 'Denominador: ',
+        'symbol': '÷'
+    },
+    '5': {
+        'func': power,
+        'prompt_a': 'Base: ',
+        'prompt_b': 'Expoente: ',
+        'symbol': '^'
+    }
+}
+
+
 def show_menu():
     """Print the main menu with all available options."""
     title('CALCULADORA PYTHON')
@@ -20,6 +54,31 @@ def show_menu():
     line()
 
 
+def run_operation(operation):
+    """Run one calculator operation from start to finish.
+
+    Asks the user for two numbers, calculates the result and shows it.
+    If the calculation fails, shows an error message instead.
+
+    Args:
+        operation: A dictionary with the data of one operation, from
+            OPERATIONS (function, prompts and symbol).
+    """
+    a = read_number(operation['prompt_a'])
+    b = read_number(operation['prompt_b'])
+    try:
+        result = operation['func'](a, b)
+    except OverflowError:
+        print('ERRO: Resultado grande demais.')
+    except ZeroDivisionError:
+        print('ERRO: Operação indefinida (divisão por zero).')
+    except ValueError:
+        print('ERRO: Resultado não é real.')
+    else:
+        print(f'Resultado: {result}')
+
+
+
 def handle_choice(option):
     """Run the action that matches the chosen menu option.
 
@@ -27,57 +86,8 @@ def handle_choice(option):
         option: The option typed by the user, as a string.
     """
     match option:
-        case '1':
-            a = read_number('Primeiro número: ')
-            b = read_number('Segundo número: ')
-            try:
-                result = add(a, b)
-            except OverflowError:
-                print('ERRO: Resultado grande demais.')
-            else:
-                print(f'Resultado: {result}')
-        case '2':
-            a = read_number('Primeiro número: ')
-            b = read_number('Segundo número: ')
-            try:
-                result = subtract(a, b)
-            except OverflowError:
-                print('ERRO: Resultado grande demais.')
-            else:
-                print(f'Resultado: {result}')
-        case '3':
-            a = read_number('Primeiro número: ')
-            b = read_number('Segundo número: ')
-            try:
-                result = multiply(a, b)
-            except OverflowError:
-                print('ERRO: Resultado grande demais.')
-            else:
-                print(f'Resultado: {result}')
-        case '4':
-            a = read_number('Numerador: ')
-            b = read_number('Denominador: ')
-            try:
-                result = divide(a, b)
-            except OverflowError:
-                print('ERRO: Resultado grande demais.')
-            except ZeroDivisionError:
-                print('ERRO: Divisão por zero não é permitida.')
-            else:
-                print(f'Resultado: {result}')
-        case '5':
-            a = read_number('Base: ')
-            b = read_number('Expoente: ')
-            try:
-                result = power(a, b)
-            except OverflowError:
-                print('ERRO: Resultado grande demais.')
-            except ZeroDivisionError:
-                print('ERRO: Zero não pode ser elevado a um número negativo.')
-            except ValueError:
-                print('ERRO: Resultado não é real.')
-            else:
-                print(f'Resultado: {result}')
+        case '1' | '2' | '3' | '4' | '5':
+            run_operation(OPERATIONS[option])
         case '6':
             print('Opção ainda não disponível')
         case '7':
