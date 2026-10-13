@@ -37,4 +37,4 @@ def handle_choice(option):
         case '7':
             print('Opção ainda não disponível')
         case _:
-            print('\033[31mERRO: Opção inválida!\033[m')
+            print('\033[31mERRO: Digite uma opção válida!\033[m')
