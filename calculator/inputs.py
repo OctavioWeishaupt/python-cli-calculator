@@ -26,3 +26,24 @@ def read_number(prompt='Digite um valor: '):
             print('ERRO: Digite um número válido!')
         else:
             return number
+
+
+def read_confirmation(prompt='Deseja continuar? [S/N] '):
+    """Ask a yes/no question until the user gives a valid answer.
+
+    Accepts 's' or 'n', in upper or lower case and with extra spaces.
+    Any other answer, including an empty one, shows an error and asks
+    again.
+
+    Args:
+        prompt: The question shown to the user.
+
+    Returns:
+        True if the user answered yes, False if the user answered no.
+    """
+    while True:
+        choice = input(prompt).lower().strip()
+        if choice not in ['s', 'n']:
+            print('ERRO: Digite uma opção válida!')
+        else:
+            return choice == 's'
