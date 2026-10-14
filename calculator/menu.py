@@ -2,7 +2,7 @@
 
 
 from calculator.inputs import read_number
-from calculator.ui import title, line
+from calculator.ui import title, line, format_number
 from calculator.operations import add, subtract, multiply, divide, power
 
 
@@ -57,8 +57,9 @@ def show_menu():
 def run_operation(operation):
     """Run one calculator operation from start to finish.
 
-    Asks the user for two numbers, calculates the result and shows it.
-    If the calculation fails, shows an error message instead.
+    Asks the user for two numbers, calculates the result and shows the
+    full expression (for example, 2 + 3 = 5). If the calculation fails,
+    shows an error message instead.
 
     Args:
         operation: A dictionary with the data of one operation, from
@@ -75,7 +76,7 @@ def run_operation(operation):
     except ValueError:
         print('ERRO: Resultado não é real.')
     else:
-        print(f'Resultado: {result}')
+        print(f'{format_number(a)} {operation['symbol']} {format_number(b)} = {format_number(result)}')
 
 
 
