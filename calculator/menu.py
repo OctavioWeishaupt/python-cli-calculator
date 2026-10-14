@@ -4,7 +4,7 @@
 from calculator.inputs import read_number
 from calculator.ui import title, line, format_expression
 from calculator.operations import add, subtract, multiply, divide, power
-
+from calculator.history import add_entry
 
 OPERATIONS = {
     '1': {
@@ -58,8 +58,9 @@ def run_operation(operation):
     """Run one calculator operation from start to finish.
 
     Asks the user for two numbers, calculates the result and shows the
-    full expression (for example, 2 + 3 = 5). If the calculation fails,
-    shows an error message instead.
+    full expression (for example, 2 + 3 = 5). Successful calculations
+    are also saved in the history. If the calculation fails, shows an
+    error message instead and nothing is saved.
 
     Args:
         operation: A dictionary with the data of one operation, from
@@ -77,7 +78,7 @@ def run_operation(operation):
         print('ERRO: Resultado não é real.')
     else:
         print(format_expression(a, operation['symbol'], b, result))
-
+        add_entry(a, operation['symbol'], b, result)
 
 
 def handle_choice(option):
