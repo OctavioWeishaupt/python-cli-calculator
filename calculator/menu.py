@@ -1,10 +1,10 @@
 """Main menu display and option handling."""
 
 
-from calculator.inputs import read_number
+from calculator.inputs import read_number, read_confirmation
 from calculator.ui import title, line, format_expression
 from calculator.operations import add, subtract, multiply, divide, power
-from calculator.history import add_entry, get_entries
+from calculator.history import add_entry, get_entries, clear_entries
 
 OPERATIONS = {
     '1': {
@@ -71,6 +71,23 @@ def show_history():
         title('Histórico vazio.')
 
 
+def clear_history():
+    """Ask for confirmation and clear the calculation history.
+
+    If the history is empty, only informs the user, without asking anything.
+    If the user confirms, all entries are removed; otherwise nothing changes.
+    """
+    if not get_entries():
+        print('Histórico já está vazio.')
+    else:
+        confirmation = read_confirmation('Deseja apagar todo o histórico? [S/N] ')
+        if confirmation:
+            clear_entries()
+            print('Histórico apagado com sucesso!')
+        else:
+            print('Operação cancelada.')
+
+
 def run_operation(operation):
     """Run one calculator operation from start to finish.
 
@@ -110,6 +127,6 @@ def handle_choice(option):
         case '6':
             show_history()
         case '7':
-            print('Opção ainda não disponível')
+            clear_history()
         case _:
             print('ERRO: Digite uma opção válida!')
