@@ -24,3 +24,8 @@ def get_entries():
         not affect the stored history.
     """
     return _entries.copy()
+
+
+def clear_entries():
+    """Remove all calculations from the stored history."""
+    _entries.clear()
