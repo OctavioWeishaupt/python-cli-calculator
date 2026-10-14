@@ -2,7 +2,7 @@
 
 
 from calculator.inputs import read_number
-from calculator.ui import title, line, format_number
+from calculator.ui import title, line, format_expression
 from calculator.operations import add, subtract, multiply, divide, power
 
 
@@ -76,7 +76,7 @@ def run_operation(operation):
     except ValueError:
         print('ERRO: Resultado não é real.')
     else:
-        print(f'{format_number(a)} {operation['symbol']} {format_number(b)} = {format_number(result)}')
+        print(format_expression(a, operation['symbol'], b, result))
 
 
 
