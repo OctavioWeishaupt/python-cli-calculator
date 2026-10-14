@@ -4,7 +4,7 @@
 from calculator.inputs import read_number
 from calculator.ui import title, line, format_expression
 from calculator.operations import add, subtract, multiply, divide, power
-from calculator.history import add_entry
+from calculator.history import add_entry, get_entries
 
 OPERATIONS = {
     '1': {
@@ -54,6 +54,23 @@ def show_menu():
     line()
 
 
+def show_history():
+    """Show the calculation history on the screen.
+
+    Prints every saved calculation, numbered from 1, in the order they
+    were made. If nothing has been saved yet, shows a message saying
+    the history is empty.
+    """
+    entries = get_entries()
+    if entries:
+        title('HISTÓRICO:')
+        for index, entry in enumerate(entries, start=1):
+            print(f'{index}. {format_expression(entry['num1'], entry['symbol'], entry['num2'], entry['result'])}')
+        line()
+    else:
+        title('Histórico vazio.')
+
+
 def run_operation(operation):
     """Run one calculator operation from start to finish.
 
@@ -91,7 +108,7 @@ def handle_choice(option):
         case '1' | '2' | '3' | '4' | '5':
             run_operation(OPERATIONS[option])
         case '6':
-            print('Opção ainda não disponível')
+            show_history()
         case '7':
             print('Opção ainda não disponível')
         case _:
