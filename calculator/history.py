@@ -47,3 +47,23 @@ def get_entries():
 def clear_entries():
     """Remove all calculations from the stored history."""
     _entries.clear()
+
+
+def _parse_line(line):
+    """Convert one line of the history file into an entry dictionary.
+
+    Args:
+        line: A line in the format 'num1;symbol;num2;result', with or
+            without the trailing newline.
+
+    Returns:
+        A dict with the keys 'num1', 'symbol', 'num2' and 'result'.
+        The three numeric values are floats.
+    """
+    parts = line.strip().split(';')
+    return {
+        'num1': float(parts[0]),
+        'symbol': parts[1],
+        'num2': float(parts[2]),
+        'result': float(parts[3])
+    }
