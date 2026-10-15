@@ -23,6 +23,9 @@ def save_entry(num1, symbol, num2, result):
 def get_entries():
     """Read the history file and return its entries.
 
+    Lines that cannot be parsed (blank, incomplete or with invalid
+    values) are skipped.
+
     Returns:
         A list of dicts with the keys 'num1', 'symbol', 'num2' and
         'result', in the order they were saved. The list is empty if
@@ -36,7 +39,10 @@ def get_entries():
         pass
     else:
         for line in lines:
-            entries.append(_parse_line(line))
+            try:
+                entries.append(_parse_line(line))
+            except ValueError:
+                continue
     return entries
 
 
@@ -56,8 +62,14 @@ def _parse_line(line):
     Returns:
         A dict with the keys 'num1', 'symbol', 'num2' and 'result'.
         The three numeric values are floats.
+
+    Raises:
+        ValueError: If the line does not have exactly four fields or
+            if a numeric field is not a valid number.
     """
     parts = line.strip().split(';')
+    if len(parts) != 4:
+        raise ValueError
     return {
         'num1': float(parts[0]),
         'symbol': parts[1],
