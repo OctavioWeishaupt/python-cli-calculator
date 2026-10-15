@@ -2,6 +2,7 @@
 
 
 from math import isfinite
+from calculator.ui import colorize
 
 
 def read_number(prompt='Digite um valor: '):
@@ -23,7 +24,7 @@ def read_number(prompt='Digite um valor: '):
             if not isfinite(number):
                 raise ValueError
         except ValueError:
-            print('ERRO: Digite um número válido!')
+            print(colorize('ERRO: Digite um número válido!', 'red'))
         else:
             return number
 
@@ -44,6 +45,6 @@ def read_confirmation(prompt='Deseja continuar? [S/N] '):
     while True:
         choice = input(prompt).lower().strip()
         if choice not in ['s', 'n']:
-            print('ERRO: Digite uma opção válida!')
+            print(colorize('ERRO: Digite uma opção válida!', 'red'))
         else:
             return choice == 's'
