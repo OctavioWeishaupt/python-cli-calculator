@@ -39,3 +39,19 @@ def format_number(num):
     else:
         txt_num = f'{num:.6f}'
         return txt_num.rstrip('0').rstrip('.')
+
+
+def format_expression(num1, symbol, num2, result):
+    """Build the text of a calculation, such as '2 + 3 = 5'.
+
+    Args:
+        num1: The first number of the operation.
+        symbol: The operation symbol (for example, '+').
+        num2: The second number of the operation.
+        result: The result of the operation.
+
+    Returns:
+        The calculation as text, with the three numbers formatted
+        by format_number.
+    """
+    return f'{format_number(num1)} {symbol} {format_number(num2)} = {format_number(result)}'

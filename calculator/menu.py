@@ -1,10 +1,10 @@
 """Main menu display and option handling."""
 
 
-from calculator.inputs import read_number
-from calculator.ui import title, line, format_number
+from calculator.inputs import read_number, read_confirmation
+from calculator.ui import title, line, format_expression
 from calculator.operations import add, subtract, multiply, divide, power
-
+from calculator.history import save_entry, get_entries, clear_entries
 
 OPERATIONS = {
     '1': {
@@ -54,12 +54,47 @@ def show_menu():
     line()
 
 
+def show_history():
+    """Show the calculation history on the screen.
+
+    Prints every saved calculation, numbered from 1, in the order they
+    were made. If nothing has been saved yet, shows a message saying
+    the history is empty.
+    """
+    entries = get_entries()
+    if entries:
+        title('HISTÓRICO:')
+        for index, entry in enumerate(entries, start=1):
+            print(f'{index}. {format_expression(entry['num1'], entry['symbol'], entry['num2'], entry['result'])}')
+        line()
+    else:
+        title('Histórico vazio.')
+
+
+def clear_history():
+    """Ask for confirmation and clear the calculation history.
+
+    If the history is empty, only informs the user, without asking anything.
+    If the user confirms, all entries are removed; otherwise nothing changes.
+    """
+    if not get_entries():
+        print('Histórico já está vazio.')
+    else:
+        confirmation = read_confirmation('Deseja apagar todo o histórico? [S/N] ')
+        if confirmation:
+            clear_entries()
+            print('Histórico apagado com sucesso!')
+        else:
+            print('Operação cancelada.')
+
+
 def run_operation(operation):
     """Run one calculator operation from start to finish.
 
     Asks the user for two numbers, calculates the result and shows the
-    full expression (for example, 2 + 3 = 5). If the calculation fails,
-    shows an error message instead.
+    full expression (for example, 2 + 3 = 5). Successful calculations
+    are also saved in the history. If the calculation fails, shows an
+    error message instead and nothing is saved.
 
     Args:
         operation: A dictionary with the data of one operation, from
@@ -76,8 +111,8 @@ def run_operation(operation):
     except ValueError:
         print('ERRO: Resultado não é real.')
     else:
-        print(f'{format_number(a)} {operation['symbol']} {format_number(b)} = {format_number(result)}')
-
+        print(format_expression(a, operation['symbol'], b, result))
+        save_entry(a, operation['symbol'], b, result)
 
 
 def handle_choice(option):
@@ -90,8 +125,8 @@ def handle_choice(option):
         case '1' | '2' | '3' | '4' | '5':
             run_operation(OPERATIONS[option])
         case '6':
-            print('Opção ainda não disponível')
+            show_history()
         case '7':
-            print('Opção ainda não disponível')
+            clear_history()
         case _:
             print('ERRO: Digite uma opção válida!')
