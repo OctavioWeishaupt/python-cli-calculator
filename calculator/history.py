@@ -38,19 +38,29 @@ def save_entry(num1, symbol, num2, result):
 
 
 def get_entries():
-    """Return a copy of the stored history.
+    """Read the history file and return its entries.
 
     Returns:
-        A new list with one dictionary per calculation, in the order
-        they were made. Adding or removing items from this list does
-        not affect the stored history.
+        A list of dicts with the keys 'num1', 'symbol', 'num2' and
+        'result', in the order they were saved. The list is empty if
+        the file does not exist yet.
     """
-    return _entries.copy()
+    entries = []
+    try:
+        with open(HISTORY_FILE, 'r', encoding='utf-8') as file:
+            lines = file.readlines()
+    except FileNotFoundError:
+        pass
+    else:
+        for line in lines:
+            entries.append(_parse_line(line))
+    return entries
 
 
 def clear_entries():
-    """Remove all calculations from the stored history."""
-    _entries.clear()
+    """Remove all calculations from the history file."""
+    with open(HISTORY_FILE, 'w', encoding='utf-8') as file:
+        pass
 
 
 def _parse_line(line):
