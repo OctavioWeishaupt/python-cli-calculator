@@ -78,14 +78,14 @@ def clear_history():
     If the user confirms, all entries are removed; otherwise nothing changes.
     """
     if not get_entries():
-        print('Histórico já está vazio.')
+        print(colorize('Histórico já está vazio.', 'yellow'))
     else:
         confirmation = read_confirmation('Deseja apagar todo o histórico? [S/N] ')
         if confirmation:
             clear_entries()
             print(colorize('Histórico apagado com sucesso!', 'green'))
         else:
-            print('Operação cancelada.')
+            print(colorize('Operação cancelada.', 'yellow'))
 
 
 def run_operation(operation):
