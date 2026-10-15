@@ -16,13 +16,13 @@ def line():
 
 
 def title(txt):
-    """Print a text centered between two separator lines.
+    """Print a cyan text centered between two separator lines.
 
     Args:
         txt: The title text to display.
     """
     line()
-    print(txt.center(LEN_LINE))
+    print(colorize(txt.center(LEN_LINE), 'cyan'))
     line()
 
 
