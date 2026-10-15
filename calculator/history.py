@@ -5,7 +5,10 @@ _entries = []
 
 
 def add_entry(num1, symbol, num2, result):
-    """Store one calculation in the history.
+    """Add a calculation to the history.
+
+    The calculation is stored in memory and also appended to the
+    history file.
 
     Args:
         num1: The first number of the operation.
@@ -14,6 +17,7 @@ def add_entry(num1, symbol, num2, result):
         result: The result of the operation.
     """
     _entries.append({'num1': num1, 'symbol': symbol, 'num2': num2, 'result': result})
+    save_entry(num1, symbol, num2, result)
 
 
 def save_entry(num1, symbol, num2, result):
