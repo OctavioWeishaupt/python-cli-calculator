@@ -4,7 +4,7 @@
 from calculator.inputs import read_number, read_confirmation
 from calculator.ui import title, line, format_expression
 from calculator.operations import add, subtract, multiply, divide, power
-from calculator.history import add_entry, get_entries, clear_entries
+from calculator.history import save_entry, get_entries, clear_entries
 
 OPERATIONS = {
     '1': {
@@ -112,7 +112,7 @@ def run_operation(operation):
         print('ERRO: Resultado não é real.')
     else:
         print(format_expression(a, operation['symbol'], b, result))
-        add_entry(a, operation['symbol'], b, result)
+        save_entry(a, operation['symbol'], b, result)
 
 
 def handle_choice(option):

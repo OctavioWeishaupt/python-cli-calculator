@@ -3,20 +3,6 @@
 HISTORY_FILE = 'history.txt'
 
 
-def add_entry(num1, symbol, num2, result):
-    """Add a calculation to the history.
-
-    The calculation is appended to the history file.
-
-    Args:
-        num1: The first number of the operation.
-        symbol: The operation symbol (for example, '+').
-        num2: The second number of the operation.
-        result: The result of the operation.
-    """
-    save_entry(num1, symbol, num2, result)
-
-
 def save_entry(num1, symbol, num2, result):
     """Append one calculation to the history file.
 
