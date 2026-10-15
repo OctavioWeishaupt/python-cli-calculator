@@ -1,14 +1,12 @@
-"""In-memory history of the calculator operations."""
+"""Calculation history stored in a text file."""
 
 HISTORY_FILE = 'history.txt'
-_entries = []
 
 
 def add_entry(num1, symbol, num2, result):
     """Add a calculation to the history.
 
-    The calculation is stored in memory and also appended to the
-    history file.
+    The calculation is appended to the history file.
 
     Args:
         num1: The first number of the operation.
@@ -16,7 +14,6 @@ def add_entry(num1, symbol, num2, result):
         num2: The second number of the operation.
         result: The result of the operation.
     """
-    _entries.append({'num1': num1, 'symbol': symbol, 'num2': num2, 'result': result})
     save_entry(num1, symbol, num2, result)
 
 
