@@ -2,7 +2,7 @@
 
 
 from calculator.inputs import read_number, read_confirmation
-from calculator.ui import title, line, format_expression
+from calculator.ui import title, line, format_expression, colorize
 from calculator.operations import add, subtract, multiply, divide, power
 from calculator.history import save_entry, get_entries, clear_entries
 
@@ -78,14 +78,14 @@ def clear_history():
     If the user confirms, all entries are removed; otherwise nothing changes.
     """
     if not get_entries():
-        print('Histórico já está vazio.')
+        print(colorize('Histórico já está vazio.', 'yellow'))
     else:
         confirmation = read_confirmation('Deseja apagar todo o histórico? [S/N] ')
         if confirmation:
             clear_entries()
-            print('Histórico apagado com sucesso!')
+            print(colorize('Histórico apagado com sucesso!', 'green'))
         else:
-            print('Operação cancelada.')
+            print(colorize('Operação cancelada.', 'yellow'))
 
 
 def run_operation(operation):
@@ -105,13 +105,13 @@ def run_operation(operation):
     try:
         result = operation['func'](a, b)
     except OverflowError:
-        print('ERRO: Resultado grande demais.')
+        print(colorize('ERRO: Resultado grande demais.', 'red'))
     except ZeroDivisionError:
-        print('ERRO: Operação indefinida (divisão por zero).')
+        print(colorize('ERRO: Operação indefinida (divisão por zero).', 'red'))
     except ValueError:
-        print('ERRO: Resultado não é real.')
+        print(colorize('ERRO: Resultado não é real.', 'red'))
     else:
-        print(format_expression(a, operation['symbol'], b, result))
+        print(colorize(format_expression(a, operation['symbol'], b, result), 'green'))
         save_entry(a, operation['symbol'], b, result)
 
 
@@ -129,4 +129,4 @@ def handle_choice(option):
         case '7':
             clear_history()
         case _:
-            print('ERRO: Digite uma opção válida!')
+            print(colorize('ERRO: Digite uma opção válida!', 'red'))

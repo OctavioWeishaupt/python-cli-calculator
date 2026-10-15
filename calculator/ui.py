@@ -2,7 +2,13 @@
 
 
 LEN_LINE = 50
-
+COLORS = {
+    'reset': '\033[m',
+    'red': '\033[31m',
+    'green': '\033[32m',
+    'yellow': '\033[33m',
+    'cyan': '\033[36m'
+}
 
 def line():
     """Print a horizontal separator line."""
@@ -10,13 +16,13 @@ def line():
 
 
 def title(txt):
-    """Print a text centered between two separator lines.
+    """Print a cyan text centered between two separator lines.
 
     Args:
         txt: The title text to display.
     """
     line()
-    print(txt.center(LEN_LINE))
+    print(colorize(txt.center(LEN_LINE), 'cyan'))
     line()
 
 
@@ -55,3 +61,16 @@ def format_expression(num1, symbol, num2, result):
         by format_number.
     """
     return f'{format_number(num1)} {symbol} {format_number(num2)} = {format_number(result)}'
+
+
+def colorize(text, color):
+    """Wrap a text in an ANSI color code.
+
+    Args:
+        text: The text to be colored.
+        color: Name of the color: 'red', 'green', 'yellow' or 'cyan'.
+
+    Returns:
+        The text wrapped with the color code and the reset code.
+    """
+    return f'{COLORS[color]}{text}{COLORS["reset"]}'
