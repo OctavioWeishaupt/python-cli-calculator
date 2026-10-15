@@ -83,7 +83,7 @@ def clear_history():
         confirmation = read_confirmation('Deseja apagar todo o histórico? [S/N] ')
         if confirmation:
             clear_entries()
-            print('Histórico apagado com sucesso!')
+            print(colorize('Histórico apagado com sucesso!', 'green'))
         else:
             print('Operação cancelada.')
 
@@ -111,7 +111,7 @@ def run_operation(operation):
     except ValueError:
         print(colorize('ERRO: Resultado não é real.', 'red'))
     else:
-        print(format_expression(a, operation['symbol'], b, result))
+        print(colorize(format_expression(a, operation['symbol'], b, result), 'green'))
         save_entry(a, operation['symbol'], b, result)
 
 
